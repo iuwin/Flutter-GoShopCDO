@@ -2,6 +2,11 @@
 
 E-commerce Mobile Application
 
+# Tech Stack
+
+* Dart/Flutter
+* Firebase
+
 # Core Team
 
 * Project Manager: Christian Al Barbin
