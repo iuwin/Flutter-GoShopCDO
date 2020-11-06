@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                       ),
                     SizedBox(height: 20.0,),
                     Text(
-                      'Please sign in to continue',
+                      'Welcome! sign in to continue',
                       style: TextStyle(
                         color: Colors.grey[500]
                       )
@@ -99,16 +99,18 @@ class _LoginState extends State<Login> {
                       },
                       child: Listener(
                         child: Container(
-                          padding: EdgeInsets.fromLTRB(129.0, 26.0, 129.0, 26.0),
+                          padding: EdgeInsets.fromLTRB(127.0, 20.0, 127.0, 20.0),
                           decoration: BoxDecoration(
                             color: loginTouching == true ? Color(0xFFB296961) : Color(0xFFB308278),
-                            borderRadius: BorderRadius.circular(18),
+                            borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Text(
                               'Login',
                               style: TextStyle(
                                 color: Colors.white,
                                 letterSpacing: 1.2,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold
                               ),
                             ),
                         ),
