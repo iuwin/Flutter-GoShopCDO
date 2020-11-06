@@ -56,27 +56,42 @@ class _LoginState extends State<Login> {
                 ),
                 child: Column(
                   children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        prefixIcon: Icon(Icons.email),
-                        border: new OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0)
-                        )
+                    Theme(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          prefixIcon: Icon(Icons.email),
+                          border: new OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.circular(25.0)
+                          )
+                        ),
+                      ),
+                      data: Theme.of(context).copyWith(
+                        primaryColor: Color(0xFFB296961)
                       ),
                     ),
                     SizedBox(height: 30.0,),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        prefixIcon: Icon(Icons.lock),
-                        border: new OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0)
+                    Theme(
+                      child: TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
+                          border: new OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.black, width: 1.0),
+                            borderRadius: BorderRadius.circular(25.0)
+                          )
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.red, width: 2.0),
-                          borderRadius: BorderRadius.circular(25.0)
-                        )
+                      ),
+                      data: Theme.of(context).copyWith(
+                        primaryColor: Color(0xFFB296961)
                       ),
                     )
                   ],
@@ -101,7 +116,7 @@ class _LoginState extends State<Login> {
                         child: Container(
                           padding: EdgeInsets.fromLTRB(127.0, 20.0, 127.0, 20.0),
                           decoration: BoxDecoration(
-                            color: loginTouching == true ? Color(0xFFB296961) : Color(0xFFB308278),
+                            color: loginTouching == true ? Color(0xFFB308278) : Color(0xFFB296961),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Text(
