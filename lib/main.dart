@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'router.dart' as router;
 import 'pages/loading.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
@@ -9,14 +10,15 @@ void main() => runApp(MaterialApp(
   theme: ThemeData(fontFamily: 'Nunito'),
 
   initialRoute: '/login',  //initial sa kay wapay loading screen
-  routes: {
+  onGenerateRoute: router.generateRoute,
 
-    '/' :  (context) => LoadingScreen(),
-    '/home' : (context) => Home(),
-    '/login' : (context) => Login(),
-    '/register' : (context) => Register(),
+  // routes: {
+  //   '/' :  (context) => LoadingScreen(),
+  //   '/home' : (context) => Home(),
+  //   '/login' : (context) => Login(),
+  //   '/register' : (context) => Register(),
 
-  },
+  // },
 ));
 
 

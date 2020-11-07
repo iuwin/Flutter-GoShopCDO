@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                       ),
                     SizedBox(height: 20.0,),
                     Text(
-                      'Welcome! sign in to continue',
+                      'Welcome to GoShop CDO!',
                       style: TextStyle(
                         color: Colors.grey[500]
                       )
@@ -107,10 +107,7 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 35.0,),
                     GestureDetector( 
                       onTap: () {
-                        setState(() {
-
-                          }
-                        );
+                        Navigator.pushNamed(context, '/home');
                       },
                       child: Listener(
                         child: Container(
