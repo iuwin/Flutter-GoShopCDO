@@ -23,40 +23,7 @@ class _RegisterState extends State<Register> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-/***** EMAIL TEXTFORMFIELD WIDGETS*****/
-  Widget _buildEmail() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Email is Required';
-          }
-
-          if (!RegExp(
-                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-              .hasMatch(value)) {
-            return 'Please enter a valid email Address';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _email = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Email',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** ADDRESS TEXTFORMFIELD WIDGETS*****/
+  /***** RegistrationTextField TEXTFORMFIELD WIDGETS*****/
   Widget _buildRegistrationTextField({String hintTextType}) {
     return Theme(
       child: TextFormField(
