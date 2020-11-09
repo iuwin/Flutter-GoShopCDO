@@ -56,240 +56,86 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  /***** USERNAME TEXTFORMFIELD WIDGETS*****/
-  Widget _buildUserName() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Username is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _userName = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'UserName',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** FIRST PASSWORD TEXTFORMFIELD WIDGETS*****/
-  Widget _buildFirstPassword() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Password is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _firstPassword = value;
-        },
-        keyboardType: TextInputType.visiblePassword,
-        decoration: InputDecoration(
-          hintText: 'Password',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-
-    /***** SECONDPASSWORD TEXTFORMFIELD WIDGETS*****/
-  }
-
-  Widget _buildSecondPassword() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Password is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _secondPassword = value;
-        },
-        keyboardType: TextInputType.visiblePassword,
-        decoration: InputDecoration(
-          hintText: 'Confirm Password',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** MOBILENUMBER TEXTFORMFIELD WIDGETS*****/
-  Widget _buildMobileNumber() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Mobile number is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _mobileNumber = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Mobile Number',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** FIRSTNAME TEXTFORMFIELD WIDGETS*****/
-  Widget _buildFirstName() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'First Name is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _firstName = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'First Name',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** MIDDLENAME TEXTFORMFIELD WIDGETS*****/
-  Widget _buildMiddleName() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Middle Name is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _middleName = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Middle Name',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** SURNAME TEXTFORMFIELD WIDGETS*****/
-  Widget _buildSurname() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Surname is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _surname = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Surname',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
-  /***** GENDER TEXTFORMFIELD WIDGETS*****/
-  Widget _buildGender() {
-    return Theme(
-      child: TextFormField(
-        validator: (String value) {
-          if (value.isEmpty) {
-            return 'Gender is Required';
-          }
-          return null;
-        },
-        onSaved: (String value) {
-          _gender = value;
-        },
-        decoration: InputDecoration(
-          hintText: 'Gender',
-          border:
-              new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black, width: 1.0),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-        ),
-      ),
-      data: Theme.of(context).copyWith(primaryColor: Color(0xFFB296961)),
-    );
-  }
-
   /***** ADDRESS TEXTFORMFIELD WIDGETS*****/
-  Widget _buildAddress() {
+  Widget _buildRegistrationTextField({String hintTextType}) {
     return Theme(
       child: TextFormField(
         validator: (String value) {
-          if (value.isEmpty) {
-            return 'Address is Required';
+          print('$hintTextType');
+          if (hintTextType == 'Email') {
+            if (value.isEmpty) {
+              return 'Email is Required';
+            }
+            if (!RegExp(
+                    r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
+              return 'Please enter a valid email Address';
+            }
+          } else if (hintTextType == 'UserName') {
+            if (value.isEmpty) {
+              return 'UserName is Required';
+            }
+          } else if (hintTextType == 'Password') {
+            if (value.isEmpty) {
+              return 'Password is Required';
+            }
+          } else if (hintTextType == 'Confirm Password') {
+            if (value.isEmpty) {
+              return 'Password is Required';
+            }
+          } else if (hintTextType == 'Mobile Number') {
+            if (value.isEmpty) {
+              return 'Mobile Number is Required';
+            }
+          } else if (hintTextType == 'First Name') {
+            if (value.isEmpty) {
+              return 'First Name is Required';
+            }
+          } else if (hintTextType == 'Middle Name') {
+            if (value.isEmpty) {
+              return 'Middle Name is Required';
+            }
+          } else if (hintTextType == 'Surname') {
+            if (value.isEmpty) {
+              return 'Surname is Required';
+            }
+          } else if (hintTextType == 'Gender') {
+            if (value.isEmpty) {
+              return 'Gender is Required';
+            }
+          } else if (hintTextType == 'Address') {
+            if (value.isEmpty) {
+              return 'Address is Required';
+            }
           }
+
           return null;
         },
         onSaved: (String value) {
-          _address = value;
+          if (hintTextType == 'Email') {
+            _email = value;
+          } else if (hintTextType == 'UserName') {
+            _userName = value;
+          } else if (hintTextType == 'Password') {
+            _firstPassword = value;
+          } else if (hintTextType == 'Confirm Password') {
+            _secondPassword = value;
+          } else if (hintTextType == 'Mobile Number') {
+            _mobileNumber = value;
+          } else if (hintTextType == 'First Name') {
+            _firstName = value;
+          } else if (hintTextType == 'Middle Name') {
+            _middleName = value;
+          } else if (hintTextType == 'Surname') {
+            _surname = value;
+          } else if (hintTextType == 'Gender') {
+            _gender = value;
+          } else if (hintTextType == 'Address') {
+            _address = value;
+          }
         },
         decoration: InputDecoration(
-          hintText: 'Adress',
+          hintText: '$hintTextType',
           border:
               new OutlineInputBorder(borderRadius: BorderRadius.circular(25.0)),
           focusedBorder: OutlineInputBorder(
@@ -385,27 +231,31 @@ class _RegisterState extends State<Register> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        _buildEmail(),
+                        _buildRegistrationTextField(hintTextType: 'Email'),
                         SizedBox(height: 30.0),
-                        _buildUserName(),
+                        _buildRegistrationTextField(hintTextType: 'UserName'),
                         SizedBox(height: 30.0),
-                        _buildFirstPassword(),
+                        _buildRegistrationTextField(hintTextType: 'Password'),
                         SizedBox(height: 30.0),
-                        _buildSecondPassword(),
+                        _buildRegistrationTextField(
+                            hintTextType: 'Confirm Password'),
                         SizedBox(height: 30.0),
-                        _buildMobileNumber(),
+                        _buildRegistrationTextField(
+                            hintTextType: 'Mobile Number'),
                         SizedBox(height: 30.0),
-                        _buildFirstName(),
+                        _buildRegistrationTextField(hintTextType: 'First Name'),
                         SizedBox(height: 30.0),
-                        _buildMiddleName(),
+                        _buildRegistrationTextField(
+                            hintTextType: 'Middle Name'),
                         SizedBox(height: 30.0),
-                        _buildSurname(),
+                        _buildRegistrationTextField(hintTextType: 'Surname'),
                         SizedBox(height: 30.0),
-                        _buildGender(),
+                        _buildRegistrationTextField(hintTextType: 'Gender'),
                         SizedBox(height: 30.0),
-                        _buildAddress(),
+                        _buildRegistrationTextField(hintTextType: 'Address'),
                         SizedBox(height: 30.0),
-                        RegisterButton()
+                        RegisterButton(),
+                        SizedBox(height: 30.0),
                       ],
                     ),
                   ),
