@@ -12,13 +12,13 @@ void main() => runApp(MaterialApp(
   initialRoute: '/login',  //initial sa kay wapay loading screen
   onGenerateRoute: router.generateRoute,
 
-  // routes: {
-  //   '/' :  (context) => LoadingScreen(),
-  //   '/home' : (context) => Home(),
-  //   '/login' : (context) => Login(),
-  //   '/register' : (context) => Register(),
+  routes: {
+    '/' :  (context) => LoadingScreen(),
+    '/home' : (context) => Home(),
+    '/login' : (context) => Login(),
+    '/register' : (context) => Register(),
 
-  // },
+  },
 ));
 
 
