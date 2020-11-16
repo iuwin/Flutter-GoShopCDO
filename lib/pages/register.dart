@@ -168,67 +168,58 @@ class _RegisterState extends State<Register> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              /*****LOGIN HEADER*****/
-              Container(
-                margin: EdgeInsets.only(bottom: 50.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+          padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0),
+          /*****LOGIN HEADER*****/
+          /*****INPUT FIELDS*****/
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 100.0),
+                    child: Text(
                       "Register",
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text('Welcome to GoShop CDO!',
-                        style: TextStyle(color: Colors.grey[500]))
-                  ],
-                ),
-              ),
-              /*****INPUT FIELDS*****/
-              Expanded(
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        _buildRegistrationTextField(hintTextType: 'Email'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'UserName'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'Password'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(
-                            hintTextType: 'Confirm Password'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(
-                            hintTextType: 'Mobile Number'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'First Name'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(
-                            hintTextType: 'Middle Name'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'Surname'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'Gender'),
-                        SizedBox(height: 30.0),
-                        _buildRegistrationTextField(hintTextType: 'Address'),
-                        SizedBox(height: 30.0),
-                        RegisterButton(),
-                        SizedBox(height: 30.0),
-                      ],
-                    ),
                   ),
-                ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    'Welcome to GoShop CDO!',
+                    style: TextStyle(color: Colors.grey[500]),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  _buildRegistrationTextField(hintTextType: 'Email'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'UserName'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Password'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Confirm Password'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Mobile Number'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'First Name'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Middle Name'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Surname'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Gender'),
+                  SizedBox(height: 30.0),
+                  _buildRegistrationTextField(hintTextType: 'Address'),
+                  SizedBox(height: 30.0),
+                  RegisterButton(),
+                  SizedBox(height: 30.0),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
