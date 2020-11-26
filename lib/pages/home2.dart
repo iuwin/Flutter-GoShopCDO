@@ -7,7 +7,7 @@ class Home2 extends StatefulWidget {
 
 class _Home2State extends State<Home2> {
   int _currentIndex = 0;
-  List<Product> product = [
+  List<Product> products = [
     Product(imagePath: 'assets/profile.png', productName: 'Samsung'),
     Product(imagePath: 'assets/profile.png', productName: 'Real Me'),
     Product(imagePath: 'assets/profile.png', productName: 'My phone'),
@@ -158,29 +158,12 @@ class _Home2State extends State<Home2> {
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
                 child: Row(
-                  children: [
-                    _productTemplate('assets/profile.png', 'iPhone12', 11000),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _productTemplate('assets/profile.png', 'iPhone12', 11000),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _productTemplate('assets/profile.png', 'iPhone12', 11000),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _productTemplate('assets/profile.png', 'iPhone12', 11000),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _productTemplate('assets/profile.png', 'iPhone12', 11000),
-                    SizedBox(
-                      width: 25,
-                    ),
-                  ],
+                  children: products
+                      .map((product) => _productTemplate(
+                          product.imagePath, product.productName, 11000))
+                      .toList(),
                 ),
               ),
             ],
@@ -199,14 +182,10 @@ class _Home2State extends State<Home2> {
           crossAxisCount: 2,
           mainAxisSpacing: 25.0,
           //childAspectRatio: 1.0,
-          children: [
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-            _productTemplate('assets/profile.png', 'iPhone12', 11000),
-          ],
+          children: products
+              .map((product) => _productTemplate(
+                  product.imagePath, product.productName, 11000))
+              .toList(),
         ),
       ],
     );
