@@ -6,17 +6,15 @@ class Bag extends StatefulWidget {
 }
 
 class _StateProfile extends State<Bag> {
-  List<Product> products = [
-    Product(imagePath: 'assets/profile.png', productName: 'Samsung'),
-    Product(imagePath: 'assets/profile.png', productName: 'Real Me'),
-    Product(imagePath: 'assets/profile.png', productName: 'My phone'),
-    Product(imagePath: 'assets/profile.png', productName: 'I phone'),
-    Product(imagePath: 'assets/profile.png', productName: 'Cherry Mobile'),
-  ];
-
-  int _currentIndex = 0;
 
   final List<String> _tabs = ['My Bag', 'Posted Products', 'Favorite Products'];
+  List<Product> products;
+
+  @override
+  void initState() { 
+    super.initState();
+    products = initProducts();
+  }
 
   Widget _productTemplate(String imagepath, String productname, double price) {
     return Center(
@@ -183,36 +181,36 @@ class _StateProfile extends State<Bag> {
     // to have a tab controller
     return Scaffold(
       body: _defaultTabControllerWidget(context),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFB296961),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(
-              'Home',
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket),
-            title: Text('Products'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            title: Text('Notifications'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   type: BottomNavigationBarType.fixed,
+      //   selectedItemColor: Color(0xFFB296961),
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       title: Text(
+      //         'Home',
+      //       ),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.shopping_basket),
+      //       title: Text('Products'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.notifications),
+      //       title: Text('Notifications'),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person),
+      //       title: Text('Profile'),
+      //     ),
+      //   ],
+      //   onTap: (index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 }
