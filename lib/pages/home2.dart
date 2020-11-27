@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sampleflutter/product.dart';
+
+import 'bag.dart';
 
 class Home2 extends StatefulWidget {
   _Home2State createState() => _Home2State();
 }
 
 class _Home2State extends State<Home2> {
+
   int _currentIndex = 0;
-  List<Product> products = [
-    Product(imagePath: 'assets/profile.png', productName: 'Samsung'),
-    Product(imagePath: 'assets/profile.png', productName: 'Real Me'),
-    Product(imagePath: 'assets/profile.png', productName: 'My phone'),
-    Product(imagePath: 'assets/profile.png', productName: 'I phone'),
-    Product(imagePath: 'assets/profile.png', productName: 'Cherry Mobile'),
-  ];
+  List<Product> products;
+
+  @override
+  void initState() { 
+    super.initState();
+    products = initProducts();
+  }
 
   ///SEARCH BAR
   Widget _searchBar() => Container(
@@ -49,9 +53,10 @@ class _Home2State extends State<Home2> {
         width: 150,
         height: 200,
         margin: EdgeInsets.only(
+          right: 20,
           bottom: 10,
         ),
-        padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
             color: Color(0xFFBF2F1F1),
             borderRadius: BorderRadius.circular(30.0),
@@ -63,6 +68,7 @@ class _Home2State extends State<Home2> {
               )
             ]),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.asset(imagepath),
             Text(productname),
@@ -73,43 +79,7 @@ class _Home2State extends State<Home2> {
     );
   }
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _HomeBody(context),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFB296961),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(
-              'Home',
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket),
-            title: Text('Products'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            title: Text('Notifications'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget _HomeBody(BuildContext context) {
+  Widget _homeBody(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverSafeArea(
@@ -190,4 +160,54 @@ class _Home2State extends State<Home2> {
       ],
     );
   }
+
+
+  Widget _bottomNavBar() {
+    return BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Color(0xFFB296961),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text(
+              'Home',
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_basket),
+            title: Text('Products'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            title: Text('Notifications'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text('Profile'),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      );
+  }
+
+
+  Widget build(BuildContext context) {
+    final List<Widget> _children = [
+      _homeBody(context),
+      Bag(),
+    ];
+    
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: _bottomNavBar(),
+    );
+  }
+
 }
+
+
