@@ -4,22 +4,21 @@ import 'pages/loading.dart';
 import 'pages/login.dart';
 import 'pages/register.dart';
 import 'pages/home.dart';
+import 'pages/home2.dart';
+import 'pages/bag.dart';
 
 void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  theme: ThemeData(fontFamily: 'Nunito'),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Nunito'),
 
-  initialRoute: '/login',  //initial sa kay wapay loading screen
-  onGenerateRoute: router.generateRoute,
+      initialRoute: '/login', //initial sa kay wapay loading screen
+      onGenerateRoute: router.generateRoute,
 
-  // routes: {
-  //   '/' :  (context) => LoadingScreen(),
-  //   '/home' : (context) => Home(),
-  //   '/login' : (context) => Login(),
-  //   '/register' : (context) => Register(),
+      // routes: {
+      //   '/' :  (context) => LoadingScreen(),
+      //   '/home' : (context) => Home(),
+      //   '/login' : (context) => Login(),
+      //   '/register' : (context) => Register(),
 
-  // },
-));
-
-
-
+      // },
+    ));
