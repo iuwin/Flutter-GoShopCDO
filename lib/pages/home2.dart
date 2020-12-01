@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sampleflutter/product.dart';
-
+import 'search_result.dart';
 import 'bag.dart';
 
 class Home2 extends StatefulWidget {
@@ -19,21 +19,21 @@ class _Home2State extends State<Home2> {
     products = initProducts();
   }
 
-  ///SEARCH BAR
-  Widget _searchBar() => Container(
-        height: 50,
-        decoration: BoxDecoration(
-            color: Color(0xFFBF0F2F9),
-            borderRadius: BorderRadius.circular(5.0)),
-        child: TextField(
-          decoration: InputDecoration(
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.grey),
-              contentPadding: EdgeInsets.fromLTRB(5, 15, 10, 15),
-              prefixIcon: Icon(Icons.search, size: 20.0),
-              border: InputBorder.none),
-        ),
-      );
+  // ///SEARCH BAR
+  // Widget _searchBar() => Container(
+  //       height: 50,
+  //       decoration: BoxDecoration(
+  //           color: Color(0xFFBF0F2F9),
+  //           borderRadius: BorderRadius.circular(5.0)),
+  //       child: TextField(
+  //         decoration: InputDecoration(
+  //             hintText: 'Search',
+  //             hintStyle: TextStyle(color: Colors.grey),
+  //             contentPadding: EdgeInsets.fromLTRB(5, 15, 10, 15),
+  //             prefixIcon: Icon(Icons.search, size: 20.0),
+  //             border: InputBorder.none),
+  //       ),
+  //     );
 
   ///CATEGORIES
   Widget _buildCategory({String category}) => GestureDetector(
@@ -84,44 +84,59 @@ class _Home2State extends State<Home2> {
       slivers: [
         SliverSafeArea(
           sliver: SliverAppBar(
-            title: Text('Hello'),
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            title: Text('Home', style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold)),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.search, color: Colors.black, size: 30,),
+                onPressed: (){
+                  showSearch(context: context, delegate: Search());
+                },
+              )
+            ],
           ),
         ),
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              _searchBar(),
               SizedBox(
                 height: 25,
               ),
-              Text(
-                'Featured',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(left:15),
+                child: Text(
+                  'Trend',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               SizedBox(
                 height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildCategory(category: 'Gadgets'),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  _buildCategory(category: 'Clothing'),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  _buildCategory(category: 'Groceries'),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  _buildCategory(category: 'Furniture'),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildCategory(category: 'Gadgets'),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    _buildCategory(category: 'Clothing'),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    _buildCategory(category: 'Groceries'),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    _buildCategory(category: 'Furniture'),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 25,
@@ -136,15 +151,21 @@ class _Home2State extends State<Home2> {
                       .toList(),
                 ),
               ),
+              SizedBox(
+                height: 25,
+              ),
             ],
           ),
         ),
         SliverToBoxAdapter(
-          child: Text(
-            'Live Selling',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, bottom: 20),
+            child: Text(
+              'Live Selling',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -203,6 +224,7 @@ class _Home2State extends State<Home2> {
     ];
     
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _children[_currentIndex],
       bottomNavigationBar: _bottomNavBar(),
     );
@@ -210,4 +232,68 @@ class _Home2State extends State<Home2> {
 
 }
 
+//SEARCH FUNCTIONALITY 
+class Search extends SearchDelegate<String>{
 
+  //example sa
+  List products = ['tshirt', 'bluetooth earphone', 'bluetooth speaker', 'fhm magazine', 'lisa poster', 'kids clothes', 'xiaomi phone']; 
+  List recentSearched = ['earphones', 'twice merchs'];
+
+  // @override
+  // ThemeData appBarTheme(BuildContext context) {
+  //   assert(context != null);
+  //   final ThemeData theme = Theme.of(context);
+  //   assert(theme != null);
+  //   return theme;
+  // }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+      return [
+        IconButton(
+          icon: Icon(Icons.clear), 
+          onPressed: (){
+            query = '';
+          },
+        )
+      ];
+    }
+  
+    @override
+    Widget buildLeading(BuildContext context) {
+      return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: (){
+          this.close(context, null);
+        },
+      );
+    }
+    
+    @override
+    Widget buildResults(BuildContext context) {
+      return SearchResult();
+    }
+
+    @override
+    Widget buildSuggestions(BuildContext context) {
+      final suggestionList = query.isEmpty 
+          ? recentSearched
+          : products.where((p) => p.startsWith(query)).toList();
+
+      return ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          onTap: (){
+            showResults(context);
+          },
+          title: Text(suggestionList[index]),
+        ),
+        itemCount: suggestionList.length,
+      );
+ 
+  }
+
+
+}
