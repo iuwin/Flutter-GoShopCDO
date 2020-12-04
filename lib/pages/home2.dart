@@ -3,50 +3,72 @@ import 'package:flutter/rendering.dart';
 import 'package:sampleflutter/product.dart';
 import 'search_result.dart';
 import 'bag.dart';
+import 'profile.dart';
 
 class Home2 extends StatefulWidget {
   _Home2State createState() => _Home2State();
 }
 
-class _Home2State extends State<Home2> {
+class _Home2State extends State<Home2> with SingleTickerProviderStateMixin  {
 
+  TabController _tabController;
   int _currentIndex = 0;
-  List<Product> products;
+  List<Product> products = new List<Product>();
+  List<Product> clothing = new List<Product>();
+  List<Product> gadgets = new List<Product>();
+  List<Product> furnitures = new List<Product>();
+  List<Product> toys = new List<Product>();
+  List<Product> hardware = new List<Product>();
+
+
+  void _getProducts(){
+    products = initProducts();
+    // products.forEach((product) => {
+    //   if(product.category == 'clothing'){
+    //     clothing.add(product)
+    //   }else if(product.category == 'gadgets'){
+    //     gadgets.add(product)
+    //   }else if(product.category == 'furniture'){
+    //     furnitures.add(product)
+    //   }else if(product.category == 'toy'){
+    //     toys.add(product)
+    //   }else if(product.category == 'hardware'){
+    //     hardware.add(product)  
+    //   }
+    // });
+    for (var product in products){
+      if(product != null){
+        print('wala man pota');
+        if(product.category == 'clothing'){
+          print('clothing');
+          clothing.add(product);
+          
+        }else if(product.category == 'gadgets'){
+          gadgets.add(product);
+          print('gadget');
+        }else if(product.category == 'furniture'){
+          furnitures.add(product);
+          print('furniture');
+        }else if(product.category == 'toy'){
+          toys.add(product);
+          print('toy');
+        }else if(product.category == 'hardware'){
+          hardware.add(product);
+          print('hardware');
+        }
+      }
+    }
+  } 
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-    products = initProducts();
+    _getProducts();
+    _tabController = new TabController(length: 5, vsync: this);
   }
 
-  // ///SEARCH BAR
-  // Widget _searchBar() => Container(
-  //       height: 50,
-  //       decoration: BoxDecoration(
-  //           color: Color(0xFFBF0F2F9),
-  //           borderRadius: BorderRadius.circular(5.0)),
-  //       child: TextField(
-  //         decoration: InputDecoration(
-  //             hintText: 'Search',
-  //             hintStyle: TextStyle(color: Colors.grey),
-  //             contentPadding: EdgeInsets.fromLTRB(5, 15, 10, 15),
-  //             prefixIcon: Icon(Icons.search, size: 20.0),
-  //             border: InputBorder.none),
-  //       ),
-  //     );
 
-  ///CATEGORIES
-  Widget _buildCategory({String category}) => GestureDetector(
-        child: Text(
-          category,
-          style: TextStyle(
-            color: Colors.grey[500],
-          ),
-        ),
-        onTap: () {},
-      );
-
-  ///INDIVIDUAL PRODUCTS
+  ///PRODUCT TEMPLATE
   Widget _productTemplate(String imagepath, String productname, double price) {
     return Center(
       child: Container(
@@ -56,28 +78,87 @@ class _Home2State extends State<Home2> {
           right: 20,
           bottom: 10,
         ),
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: EdgeInsets.fromLTRB(00, 0, 0, 0),
         decoration: BoxDecoration(
             color: Color(0xFFBF2F1F1),
             borderRadius: BorderRadius.circular(30.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey[200],
-                blurRadius: 3,
-                offset: Offset(2, 7),
+                blurRadius: 10,
+                offset: Offset(1, 5),
               )
             ]),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Image.asset(imagepath),
-            Text(productname),
-            Text('$price'),
+            Image.asset(imagepath, width: 120, height: 120,),
+            SizedBox(height: 10),
+            Container(
+              width: 145,
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5)
+              ),
+              child: Column(
+                children: [
+                  Text(productname, style: TextStyle(fontWeight: FontWeight.bold),),
+                  SizedBox(height: 5),
+                  Text('$price'),
+                ],
+              )
+            )
           ],
         ),
       ),
     );
   }
+
+
+  ///CATEGORIES
+  Widget _categoryTabBar() => TabBar(
+    isScrollable: true,
+    unselectedLabelColor: Colors.grey,
+    labelColor: Colors.black,
+    indicatorSize: TabBarIndicatorSize.label,
+    indicatorColor: Color(0xFFB308278),
+    tabs: <Tab> [
+      Tab(
+        text: 'Clothing',
+      ),
+      Tab(
+        text: 'Gadgets'
+      ),
+      Tab(
+        text: 'Furnitures'
+      ),
+      Tab(
+        text: 'Toys'
+      ),
+      Tab(
+        text: 'Hardware'
+      )
+    ],
+    controller: _tabController,
+  );
+
+  // Widget _categoryTabBarView(tabs) => TabBarView(
+  //   children: tabs,
+  //   controller: _tabController,
+  // );
+
+  Widget _categoryTabBarContent(List<Product> productList) => SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
+    child: Row(
+      children: productList
+          .map((product) => _productTemplate(
+              product.imagePath, product.productName, 11000))
+          .toList(),
+    ),
+  );
+
 
   Widget _homeBody(BuildContext context) {
     return CustomScrollView(
@@ -86,14 +167,15 @@ class _Home2State extends State<Home2> {
           sliver: SliverAppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
-            title: Text('Home', style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold)),
+            title: Icon(Icons.filter_list, color: Colors.black),
+            //title: Text('Home', style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold)),
             actions: [
               IconButton(
                 icon: Icon(Icons.search, color: Colors.black, size: 30,),
                 onPressed: (){
                   showSearch(context: context, delegate: Search());
                 },
-              )
+              ),
             ],
           ),
         ),
@@ -116,30 +198,41 @@ class _Home2State extends State<Home2> {
               SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+               _categoryTabBar(),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                height: 220,
+                child: TabBarView(
                   children: [
-                    _buildCategory(category: 'Gadgets'),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _buildCategory(category: 'Clothing'),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _buildCategory(category: 'Groceries'),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    _buildCategory(category: 'Furniture'),
+                    _categoryTabBarContent(clothing),
+                    _categoryTabBarContent(gadgets),
+                    _categoryTabBarContent(furnitures),
+                    _categoryTabBarContent(toys),
+                    _categoryTabBarContent(hardware),
                   ],
+                  controller: _tabController,
                 ),
               ),
               SizedBox(
                 height: 25,
+              ),
+            ],
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              Padding(
+                padding: const EdgeInsets.only(left: 15, bottom: 20),
+                child: Text(
+                  'Live Selling',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -151,21 +244,18 @@ class _Home2State extends State<Home2> {
                       .toList(),
                 ),
               ),
-              SizedBox(
-                height: 25,
-              ),
-            ],
-          ),
+            ]
+          )
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.only(left: 15, bottom: 20),
-            child: Text(
-              'Live Selling',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
+              padding: const EdgeInsets.only(left: 15, bottom: 20, top: 20),
+              child: Text(
+                'Categories',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
             ),
           ),
         ),
@@ -178,6 +268,7 @@ class _Home2State extends State<Home2> {
                   product.imagePath, product.productName, 11000))
               .toList(),
         ),
+
       ],
     );
   }
@@ -187,7 +278,8 @@ class _Home2State extends State<Home2> {
     return BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFFB296961),
+        selectedItemColor: Color(0xFFB308278),
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -196,7 +288,7 @@ class _Home2State extends State<Home2> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket),
+            icon: Icon(Icons.shopping_cart),
             title: Text('Products'),
           ),
           BottomNavigationBarItem(
@@ -221,8 +313,10 @@ class _Home2State extends State<Home2> {
     final List<Widget> _children = [
       _homeBody(context),
       Bag(),
+      null,
+      Profile()
     ];
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: _children[_currentIndex],
@@ -232,11 +326,11 @@ class _Home2State extends State<Home2> {
 
 }
 
-//SEARCH FUNCTIONALITY 
+//SEARCH FUNCTIONALITY
 class Search extends SearchDelegate<String>{
 
   //example sa
-  List products = ['tshirt', 'bluetooth earphone', 'bluetooth speaker', 'fhm magazine', 'lisa poster', 'kids clothes', 'xiaomi phone']; 
+  List products = ['tshirt', 'bluetooth earphone', 'bluetooth speaker', 'fhm magazine', 'lisa poster', 'kids clothes', 'xiaomi phone'];
   List recentSearched = ['earphones', 'twice merchs'];
 
   // @override
@@ -251,14 +345,14 @@ class Search extends SearchDelegate<String>{
   List<Widget> buildActions(BuildContext context) {
       return [
         IconButton(
-          icon: Icon(Icons.clear), 
+          icon: Icon(Icons.clear),
           onPressed: (){
             query = '';
           },
         )
       ];
     }
-  
+
     @override
     Widget buildLeading(BuildContext context) {
       return IconButton(
@@ -271,7 +365,7 @@ class Search extends SearchDelegate<String>{
         },
       );
     }
-    
+
     @override
     Widget buildResults(BuildContext context) {
       return SearchResult();
@@ -279,7 +373,7 @@ class Search extends SearchDelegate<String>{
 
     @override
     Widget buildSuggestions(BuildContext context) {
-      final suggestionList = query.isEmpty 
+      final suggestionList = query.isEmpty
           ? recentSearched
           : products.where((p) => p.startsWith(query)).toList();
 
@@ -292,7 +386,7 @@ class Search extends SearchDelegate<String>{
         ),
         itemCount: suggestionList.length,
       );
- 
+
   }
 
 
