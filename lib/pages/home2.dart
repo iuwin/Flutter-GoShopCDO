@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sampleflutter/custom_widget/trend_home_product_template_widget.dart';
 import 'package:sampleflutter/product.dart';
 import 'bag.dart';
 import 'profile.dart';
-import 'package:sampleflutter/custom_widget/trend_product_template_widget.dart';
+import 'post.dart';
 import 'package:sampleflutter/custom_widget/trend_tab_bar_widget.dart';
 
 class Home2 extends StatefulWidget {
@@ -56,7 +57,7 @@ class _Home2State extends State<Home2> with SingleTickerProviderStateMixin {
         padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
         child: Row(
           children: productList
-              .map((product) => TrendProductTemplate(
+              .map((product) => TrendHomeProductTemplate(
                   imagePath: product.imagePath,
                   productName: product.productName,
                   price: 1000))
@@ -162,8 +163,51 @@ class _Home2State extends State<Home2> with SingleTickerProviderStateMixin {
         SliverList(
           delegate: SliverChildListDelegate(
             [
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15, top: 20),
+                padding: EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height * .23,
+                decoration: BoxDecoration(
+                  color: Color(0xFFB308278), //Colors.lightGreen[300],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    Positioned(
+                        left: -23,
+                        bottom: -30,
+                        child: Image.asset(
+                          'assets/basketball_shoes.png',
+                          width: 200,
+                          height: 170,
+                        )),
+                    Positioned(
+                      top: 20,
+                      right: 5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('New products',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.1)),
+                          Text('shop now',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.1)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
               SizedBox(
-                height: 25,
+                height: 35,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
@@ -250,7 +294,7 @@ class _Home2State extends State<Home2> with SingleTickerProviderStateMixin {
             mainAxisSpacing: 25.0,
             //childAspectRatio: 1.0,
             children: products
-                .map((product) => TrendProductTemplate(
+                .map((product) => TrendHomeProductTemplate(
                     imagePath: product.imagePath,
                     productName: product.productName,
                     price: 11000))
@@ -296,7 +340,12 @@ class _Home2State extends State<Home2> with SingleTickerProviderStateMixin {
 
   ///build
   Widget build(BuildContext context) {
-    final List<Widget> _children = [_homeBody(context), Bag(), null, Profile()];
+    final List<Widget> _children = [
+      _homeBody(context),
+      Bag(),
+      Post(),
+      Profile()
+    ];
 
     return Scaffold(
       backgroundColor: Colors.white,

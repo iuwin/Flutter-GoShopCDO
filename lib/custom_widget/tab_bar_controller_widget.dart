@@ -8,9 +8,14 @@ class TabBarControllers extends StatelessWidget {
   ScrollController scrollController;
   TabController tabController;
   List<String> tabs;
+  String title;
 
   TabBarControllers(
-      {this.context, this.scrollController, this.tabController, this.tabs});
+      {this.context,
+      this.scrollController,
+      this.tabController,
+      this.tabs,
+      this.title});
 
   Widget build(BuildContext context) {
     return NestedScrollView(
@@ -45,7 +50,7 @@ class TabBarControllers extends StatelessWidget {
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
-                background: TitleWidget(),
+                background: TitleWidget(title: title),
               ),
               expandedHeight: 170.0,
               forceElevated: innerBoxIsScrolled,

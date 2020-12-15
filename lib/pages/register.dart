@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sampleflutter/custom_widget/profile_picture.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _RegisterState extends State<Register> {
 /*****VARIABLE FOR TEXTFORMFIELD*****/
   bool checkBoxValue = false;
   bool newValue = false;
-  bool loginTouching = false;
+  bool registerTouching = false;
   int _value = 2;
   String _email;
   String _userName;
@@ -70,43 +71,6 @@ class _RegisterState extends State<Register> {
     } else {
       return LengthLimitingTextInputFormatter(50);
     }
-  }
-
-  //profile picture
-  Widget profilePicture() {
-    return Center(
-      child: CircleAvatar(
-        radius: 100.0,
-        backgroundColor: Colors.black26,
-        child: ClipOval(
-          child: Stack(
-            // overflow: Overflow.clip,
-            children: [
-              Positioned(
-                // top: MediaQuery.of(context).size.height * .15,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    print('Clicked');
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * .10,
-                    width: MediaQuery.of(context).size.width * 1,
-                    color: Colors.blueGrey,
-                    child: Icon(
-                      Icons.add_a_photo,
-                      size: 50.0,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   // prefix/leading sa Textformfield
@@ -265,8 +229,9 @@ class _RegisterState extends State<Register> {
         child: Container(
           padding: EdgeInsets.fromLTRB(127.0, 20.0, 127.0, 20.0),
           decoration: BoxDecoration(
-            color:
-                loginTouching == true ? Color(0xFFB308278) : Color(0xFFB296961),
+            color: registerTouching == true
+                ? Color(0xFFB308278)
+                : Color(0xFFB296961),
             borderRadius: BorderRadius.circular(25.0),
           ),
           child: Text(
@@ -279,10 +244,10 @@ class _RegisterState extends State<Register> {
           ),
         ),
         onPointerDown: (event) => setState(() {
-          loginTouching = true;
+          registerTouching = true;
         }),
         onPointerUp: (event) => setState(() {
-          loginTouching = false;
+          registerTouching = false;
         }),
       ),
     );
@@ -321,7 +286,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  profilePicture(),
+                  ProfilePicture(),
                   SizedBox(height: 30.0),
                   _buildRegistrationTextField(hintTextType: 'Email'),
                   SizedBox(height: 30.0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleflutter/custom_widget/profile_picture.dart';
 // import 'package:sampleflutter/product.dart';
 // import 'package:sampleflutter/custom_widget/trend_product_template_widget.dart';
 import 'package:sampleflutter/custom_widget/trend_tab_bar_widget.dart';
@@ -67,7 +68,7 @@ class _StateProfile extends State<Profile> with SingleTickerProviderStateMixin {
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
-                background: TitleWidget(),
+                background: TitleWidget(title: 'Profile'),
               ),
               expandedHeight: MediaQuery.of(context).size.height * .5,
               bottom: TrendTabBar(
@@ -86,39 +87,7 @@ class _StateProfile extends State<Profile> with SingleTickerProviderStateMixin {
       left: MediaQuery.of(context).size.width / 5,
       right: MediaQuery.of(context).size.width / 5,
       top: MediaQuery.of(context).size.height / 15,
-      child: Center(
-        child: CircleAvatar(
-          radius: 100.0,
-          backgroundColor: Colors.black26,
-          child: ClipOval(
-            child: Stack(
-              overflow: Overflow.clip,
-              children: [
-                Positioned(
-                  // top: MediaQuery.of(context).size.height * .15,
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Clicked');
-                    },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * .10,
-                      // width: MediaQuery.of(context).size.width * 1,
-                      color: Colors.blueGrey,
-                      child: Icon(
-                        Icons.add_a_photo,
-                        size: 50.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      child: ProfilePicture(),
     );
   }
 

@@ -37,7 +37,8 @@ class _StateProfile extends State<Bag> with SingleTickerProviderStateMixin {
           context: context,
           scrollController: _scrollController,
           tabController: _tabController,
-          tabs: _tabs),
+          tabs: _tabs,
+          title: 'Cart'),
     );
   }
 }
