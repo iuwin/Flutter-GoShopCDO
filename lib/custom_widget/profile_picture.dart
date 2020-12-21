@@ -4,7 +4,7 @@ class ProfilePicture extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CircleAvatar(
-        radius: 100.0,
+        radius: 80.0, //100
         backgroundColor: Colors.black26,
         child: ClipOval(
           child: Stack(
