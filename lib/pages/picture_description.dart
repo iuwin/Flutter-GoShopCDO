@@ -9,12 +9,12 @@ class PictureDescription extends StatefulWidget {
 class PictureDescriptionState extends State<PictureDescription> {
   static final formKey = GlobalKey<FormState>();
 
-  static TextEditingController titleController = new TextEditingController();
+  static TextEditingController productNameController = new TextEditingController();
   static TextEditingController categoryController = new TextEditingController();
-  static TextEditingController descriptionController =
-      new TextEditingController();
-  static TextEditingController conditionController =
-      new TextEditingController();
+  static TextEditingController descriptionController = new TextEditingController();
+  static TextEditingController conditionController = new TextEditingController();
+  static TextEditingController addressController = new TextEditingController();
+  
   Widget build(BuildContext context) {
     return Container(
       child: Form(
@@ -25,19 +25,26 @@ class PictureDescriptionState extends State<PictureDescription> {
             ProfilePicture(),
             SizedBox(height: 30.0),
             new CustomTextFormField(
-                hintTextType: 'Title', textEditingController: titleController),
-            SizedBox(height: 30.0),
-            new CustomTextFormField(
-                hintTextType: 'Category',
-                textEditingController: categoryController),
+                hintTextType: 'Product Name', textEditingController: productNameController,),
             SizedBox(height: 30.0),
             new CustomTextFormField(
                 hintTextType: 'Description',
-                textEditingController: descriptionController),
+                textEditingController: descriptionController,
+                height: 100,
+                maxLine: 8,
+                inputType: TextInputType.multiline,),
+            SizedBox(height: 30.0),
+            new CustomTextFormField(
+                hintTextType: 'Category',
+                textEditingController: categoryController, fieldIcon: new Icon(Icons.format_list_bulleted),),
+            SizedBox(height: 30.0),
+            new CustomTextFormField(
+                hintTextType: 'Address',
+                textEditingController: addressController, fieldIcon: new Icon(Icons.location_on),),
             SizedBox(height: 30.0),
             new CustomTextFormField(
                 hintTextType: 'Condition',
-                textEditingController: conditionController),
+                textEditingController: conditionController, fieldIcon: new Icon(Icons.sentiment_satisfied),),
             SizedBox(height: 30.0),
           ],
         ),
