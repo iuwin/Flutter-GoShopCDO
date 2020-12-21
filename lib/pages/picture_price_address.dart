@@ -12,10 +12,11 @@ class PicturePriceAddressState extends State<PicturePriceAddress> {
       new TextEditingController();
   static TextEditingController bargainPriceController =
       new TextEditingController();
-  static TextEditingController addressController = new TextEditingController();
+  static TextEditingController quantityController = new TextEditingController();
 
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 40),
       child: Form(
         key: formKey,
         autovalidate: false,
@@ -23,15 +24,15 @@ class PicturePriceAddressState extends State<PicturePriceAddress> {
           children: [
             new CustomTextFormField(
                 hintTextType: 'Fixed Price',
-                textEditingController: fixedPriceController),
+                textEditingController: fixedPriceController, fieldIcon: new Icon(Icons.monetization_on),),
             SizedBox(height: 30.0),
             new CustomTextFormField(
                 hintTextType: 'Bargain Price',
-                textEditingController: bargainPriceController),
+                textEditingController: bargainPriceController, fieldIcon: new Icon(Icons.money_off),),
             SizedBox(height: 30.0),
             new CustomTextFormField(
-                hintTextType: 'Address',
-                textEditingController: addressController),
+                hintTextType: 'Stock Quantity',
+                textEditingController: quantityController, fieldIcon: new Icon(Icons.format_align_center),),
             SizedBox(height: 30.0),
           ],
         ),

@@ -12,18 +12,54 @@ class Post extends StatefulWidget {
 
 class _Post extends State<Post> {
   int currentStep = 0;
+  bool uploadingStep = false;
+
+
+  dynamic onSubmitProduct(){
+
+
+  }
+
+
+  // List<Widget> controlButtons(Function onCancel, Function onContinue, Function onSubmitProduct){
+  //   if(uploadingStep == false){
+  //     return <Widget>[
+  //       FlatButton(
+  //         onPressed: onCancel,
+  //         child: Icon(Icons.keyboard_arrow_left),
+  //       ),
+  //       FlatButton(
+  //         onPressed: onContinue,
+  //         child: Icon(Icons.keyboard_arrow_right),
+  //       ),
+  //     ];
+  //   }else if(uploadingStep == true){
+  //     return <Widget>[
+  //       GestureDetector(
+  //         child: Container(
+  //           color: Colors.green,
+  //           child: Text(
+  //             'Post Product'
+  //           ),
+  //         ),
+  //       )
+  //     ];
+  //   }
+
+  // }
+
 
   @override
   Widget build(BuildContext context) {
     var mapData = HashMap<String, String>();
-    mapData["title"] = PictureDescriptionState.titleController.text;
+    mapData["productName"] = PictureDescriptionState.productNameController.text;
     mapData["category"] = PictureDescriptionState.categoryController.text;
     mapData["description"] = PictureDescriptionState.descriptionController.text;
     mapData["condition"] = PictureDescriptionState.conditionController.text;
+    mapData["address"] = PictureDescriptionState.addressController.text;
     mapData["fixedPrice"] = PicturePriceAddressState.fixedPriceController.text;
-    mapData["bargainPrice"] =
-        PicturePriceAddressState.bargainPriceController.text;
-    mapData["address"] = PicturePriceAddressState.addressController.text;
+    mapData["bargainPrice"] = PicturePriceAddressState.bargainPriceController.text;
+    mapData["quantity"] = PicturePriceAddressState.quantityController.text;
 
     // TODO: implement build
     return Scaffold(
@@ -40,7 +76,7 @@ class _Post extends State<Post> {
                           ? FAStepstate.complete
                           : FAStepstate.indexed,
                   content: PictureDescription(),
-                  title: Text('Photo Information'),
+                  title: Text('Product Information',),
                 ),
                 FAStep(
                   isActive: (currentStep >= 2) ? true : false,
@@ -49,7 +85,7 @@ class _Post extends State<Post> {
                       : currentStep > 1
                           ? FAStepstate.complete
                           : FAStepstate.indexed,
-                  title: Text('Photo Price and Address'),
+                  title: Text('Product Pricing'),
                   content: PicturePriceAddress(),
                 ),
                 FAStep(
@@ -72,13 +108,17 @@ class _Post extends State<Post> {
                         PictureDescriptionState.formKey.currentState
                             .validate()) {
                       currentStep = currentStep + 1;
+                      uploadingStep = false;
                     } else if (currentStep == 1 &&
                         PicturePriceAddressState.formKey.currentState
                             .validate()) {
                       currentStep = currentStep + 1;
+                      uploadingStep = false;
                     }
                   } else {
-                    currentStep = 0;
+                    uploadingStep = true;
+                    //currentStep = 0;
+
                   }
                 });
               },
@@ -102,7 +142,7 @@ class _Post extends State<Post> {
                   {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children:<Widget>[
                     FlatButton(
                       onPressed: onStepCancel,
                       child: Icon(Icons.keyboard_arrow_left),
@@ -111,7 +151,7 @@ class _Post extends State<Post> {
                       onPressed: onStepContinue,
                       child: Icon(Icons.keyboard_arrow_right),
                     ),
-                  ],
+                ]
                 );
               }),
         ),
